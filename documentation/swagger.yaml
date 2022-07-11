@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info: 
+  title: project_sheridangray Documentation
+  description: This is API's documentation
+  version: 1.0
+schemes: [http,https]
+servers:
+  - url: http://localhost:3000
+    description: local url
+    
+
+paths:
+  # addRecipe
+  /recipe:
+    post:
+      summary: add the recipe
+      parameters:
+        - in: body
+          name: recipe
+          schema:
+            type: object
+            properties:  
+              name:
+                type: string
+                example: Paneer
+              ingredients:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Paneer masala
+                    quantity:
+                      type: integer
+                      example: 2
+              prepTime:
+                type: string
+                example: 1hours
+              cookTime:
+                type: string
+                example: 1hours
+              totalTime:
+                type: string
+                example: 1hours
+              categories:
+                type: array
+                items:
+                  type: string
+                  example: 62c6c42f22ba44f233ef6e4b
+
+              preparation:
+                type: array
+                items:
+                  type: string
+                  example: boil the water               
+              
+      
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: string
+                    example: 200
+                  statusMessage: 
+                    type: string
+                    example: recipe added
+
+# get the recipe
+  /recipe/{id}:
+    get:
+      summary: give the recipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 6268eba93ae9059c39520w30
+          
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: string
+                    example: 200
+                  statusMessage: 
+                    type: string
+                    example: recipe
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: 62c6c4f622ba44f233ef6e60
+                      name:
+                        type: string
+                        example: mutter-paneer
+                      servingSize:
+                        type: integer
+                        example: 2
+                      prepTime:
+                        type: string
+                        example: 2hours
+                      cookTime:
+                        type: string
+                        example: 3hours
+                      totalTime:
+                        type: string
+                        example: 5hours
+                      ingredients:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: paneer
+                            quantity:
+                              type: integer
+                              example: 5
+                            _id:
+                              type: string
+                              example: 62c6c4f622ba44f233ef6e61
+                      preparation:
+                        type: array
+                        items:
+                          example: boil the paneer
+                          
+# delete the recipe
+  /recipe/{id}:
+    delete:
+      summary: delete the recipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 6268eba93ae9059s39520w30
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: string
+                    example: 200
+                  statusMessage: 
+                    type: string
+                    example: recipe deleted
