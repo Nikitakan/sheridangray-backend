@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ingredientSchema=new mongoose.Schema({
-    name:{
+  ingredient:{
         type:String,
         required: true
     },
@@ -9,10 +9,22 @@ const ingredientSchema=new mongoose.Schema({
         type:Number,
         required:true
     },
-    quantity:{
+    qType:{
         type:String
     }
 })
+
+const preparationSchema=new mongoose.Schema({
+  info:{
+        type:String,
+        required: true
+    },
+    step:{
+        type:Number,
+        required:true
+    }
+})
+
 
 const recipeSchema = new mongoose.Schema({
   name: {
@@ -20,10 +32,8 @@ const recipeSchema = new mongoose.Schema({
     required: true,
   },
   ingredients:[ingredientSchema],
-  preparation:{
-    type: Array,
-    // required: true
-  },
+  preparation:[preparationSchema],
+  
   servingSize:{
     type: Number,
     // required: true

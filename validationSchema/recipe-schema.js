@@ -6,8 +6,8 @@ module.exports.addRecipeValidation = async (req, res, next) => {
     try{
         const schema = Joi.object({
             name: Joi.string().required(),
-            ingredients:Joi.array().items(Joi.object({name:Joi.string().required(),quantity:Joi.number().required()})).required(),
-            preparation: Joi.array().items(Joi.string()).required(),
+            ingredients:Joi.array().items(Joi.object({ingredient:Joi.string().required(),quantity:Joi.number().required(),qType:Joi.string().optional()})).required(),
+            preparation: Joi.array().items(Joi.object({info:Joi.string().required(),step:Joi.number()})).required(),
             servingSize: Joi.number().required(),
             prepTime: Joi.string().required(),
             cookTime: Joi.string().required(),
