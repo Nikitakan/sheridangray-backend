@@ -39,15 +39,15 @@ const recipeSchema = new mongoose.Schema({
     // required: true
   },
   prepTime:{
-    type: String,
+    type: Number,
     default: null
   },
   cookTime:{
-    type: String,
+    type: Number,
     default: null
   },
   totalTime:{
-    type: String,
+    type: Number,
     default: null
   },
   categories:[{ type : mongoose.Types.ObjectId, ref: 'categories' }],

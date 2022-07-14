@@ -1,12 +1,11 @@
 const Joi = require('joi');
 const {sendResponse}=require("../helpers/requestHandler.helper")
-const {uniqueCategory}= require("./rule/uniqueCategory.rule")
+const {uniqueSubCategory}= require("./rule/uniqueSubCategory.rule")
 
-module.exports.addCategoryValidation = async (req, res, next) => {
+module.exports.addSubCategoryValidation = async (req, res, next) => {
     try{
         const schema = Joi.object({
-            name: Joi.string().required(),
-            subCategories:Joi.array().items(Joi.string().hex().length(24)).required(),
+            name: Joi.string().required()
         })
         let { value, error } = schema.validate(req.body);
         
@@ -14,8 +13,8 @@ module.exports.addCategoryValidation = async (req, res, next) => {
             return sendResponse(res, false, 422, error.details[0].message);
         }
 
-        if(!(await uniqueCategory(value.name))){
-            return sendResponse(res, false, 422, 'category already exits in DB');
+        if(!(await uniqueSubCategory(value.name))){
+            return sendResponse(res, false, 422, 'sub-category already exits in DB');
         }
 
         //set the variable in the request for validated data
@@ -26,11 +25,10 @@ module.exports.addCategoryValidation = async (req, res, next) => {
     }
 }
 
-module.exports.updateCategoryValidation = async (req, res, next) => {
+module.exports.updateSubCategoryValidation = async (req, res, next) => {
     try{
         const schema = Joi.object({
-            name: Joi.string(),
-            subCategories:Joi.array().items(Joi.string().hex().length(24)),
+            name: Joi.string()
         })
         let { value, error } = schema.validate(req.body);
         
@@ -38,8 +36,8 @@ module.exports.updateCategoryValidation = async (req, res, next) => {
             return sendResponse(res, false, 422, error.details[0].message);
         }
 
-        if(!(await uniqueCategory(value.name))){
-            return sendResponse(res, false, 422, 'category already exits in DB');
+        if(!(await uniqueSubCategory(value.name))){
+            return sendResponse(res, false, 422, 'sub-category already exits in DB');
         }
 
         //set the variable in the request for validated data

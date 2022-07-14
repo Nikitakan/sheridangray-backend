@@ -9,9 +9,9 @@ module.exports.addRecipeValidation = async (req, res, next) => {
             ingredients:Joi.array().items(Joi.object({ingredient:Joi.string().required(),quantity:Joi.number().required(),qType:Joi.string().optional()})).required(),
             preparation: Joi.array().items(Joi.object({info:Joi.string().required(),step:Joi.number()})).required(),
             servingSize: Joi.number().required(),
-            prepTime: Joi.string().required(),
-            cookTime: Joi.string().required(),
-            totalTime: Joi.string().required(),
+            prepTime: Joi.number().required(),
+            cookTime: Joi.number().required(),
+            totalTime: Joi.number().required(),
             categories: Joi.array().items(Joi.string().hex().length(24)),
         }) 
         let { value, error } = schema.validate(req.body);
@@ -56,9 +56,9 @@ module.exports.updateRecipeValidation = async (req, res, next) => {
             ingredients:Joi.array().items(Joi.object({name:Joi.string().required(),quantity:Joi.number().required()})),
             preparation: Joi.array().items(Joi.string()),
             servingSize: Joi.number(),
-            prepTime: Joi.string(),
-            cookTime: Joi.string(),
-            totalTime: Joi.string(),
+            prepTime: Joi.number(),
+            cookTime: Joi.number(),
+            totalTime: Joi.number(),
             categories: Joi.string().hex().length(24),
         })
         let { value, error } = schema.validate(req.body);
