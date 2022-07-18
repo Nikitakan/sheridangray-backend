@@ -1,5 +1,7 @@
 const CategoryModel = require("../model/categories.model");
 const { sendResponse } = require("../helpers/requestHandler.helper");
+const SubCategoryModel=require("../model/sub-categories.model");
+const subCategories = require("../model/sub-categories.model");
 
 exports.addCategory = async (req, res, next) => {
   try {
@@ -40,7 +42,25 @@ exports.deleteCategory = async (req, res, next) => {
 
 exports.getAllCategories = async (req, res, next) => {
   try {
-    const categories = await CategoryModel.find({});
+    const categories = await CategoryModel.aggregate([
+      {
+        $match:{}
+      },
+      {
+        $lookup:{
+          from:SubCategoryModel.collection.name,
+          localField:"subCategories",
+          foreignField:"_id",
+          as:"subCategoriesInfo"
+        }
+      },
+      {
+        $unwind:{
+          path:"$subCategoriesInfo",
+          preserveNullAndEmptyArrays: true
+        }
+      }
+    ]);
     return sendResponse(res, true, 200, "categories", categories);
   } catch (error) {
     next(error);
