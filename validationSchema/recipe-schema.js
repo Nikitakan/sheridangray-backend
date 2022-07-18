@@ -13,6 +13,7 @@ module.exports.addRecipeValidation = async (req, res, next) => {
             cookTime: Joi.number().required(),
             totalTime: Joi.number().required(),
             categories: Joi.array().items(Joi.string().hex().length(24)),
+            subCategory:Joi.string().hex().length(24).required()
         }) 
         let { value, error } = schema.validate(req.body);
         if (error !== undefined) {
