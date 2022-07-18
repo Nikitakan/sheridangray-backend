@@ -53,13 +53,13 @@ exports.getAllCategories = async (req, res, next) => {
           foreignField:"_id",
           as:"subCategoriesInfo"
         }
-      },
-      {
-        $unwind:{
-          path:"$subCategoriesInfo",
-          preserveNullAndEmptyArrays: true
-        }
       }
+      // {
+      //   $unwind:{
+      //     path:"$subCategoriesInfo",
+      //     preserveNullAndEmptyArrays: true
+      //   }
+      // }
     ]);
     return sendResponse(res, true, 200, "categories", categories);
   } catch (error) {
