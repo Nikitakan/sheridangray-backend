@@ -52,3 +52,19 @@ exports.getCategoriesRecipes = async (req, res, next) => {
     next(error);
   }
 };
+
+
+exports.getSubCategoriesRecipes = async (req, res, next) => {
+  try{
+    const recipes = await RecipeModel.aggregate([
+      {
+        $match: {
+          subCategory: { $in: [ObjectId(req.params.id)] },
+        },
+      },
+    ]);
+    return sendResponse(res, true, 200, "recipe", recipes);
+  }catch (error) {
+    next(error);
+  }
+}
