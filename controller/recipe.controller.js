@@ -1,6 +1,8 @@
 const RecipeModel = require("../model/recipe.model");
 const { sendResponse } = require("../helpers/requestHandler.helper");
 let { Types: { ObjectId } } = require("mongoose");
+const SubCategoryModel=require("../model/sub-categories.model");
+const CategoryModel = require("../model/categories.model");
 
 exports.addRecipe = async (req, res, next) => {
   try {
@@ -71,7 +73,28 @@ exports.getSubCategoriesRecipes = async (req, res, next) => {
 
 exports.getAllRecipes = async (req, res, next) => {
   try{
-    const recipes = await RecipeModel.find({})
+    const recipes = await RecipeModel.aggregate([
+      {$match:{}},
+      {$lookup:{
+        from:CategoryModel.collection.name,
+        localField:"categories",
+        foreignField:"_id",
+        as:"category"
+      }},
+      {$lookup:{
+        from:SubCategoryModel.collection.name,
+        localField:"subCategory",
+        foreignField:"_id",
+        as:"subCategory"
+      }},
+      {
+        $project:{
+          "category.subCategories":0,
+          // "category.name":1
+        }
+      }
+
+    ])
     return sendResponse(res, true, 200, "all-recipes", recipes);
   }catch (error) {
     next(error);
