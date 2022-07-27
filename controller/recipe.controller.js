@@ -68,3 +68,12 @@ exports.getSubCategoriesRecipes = async (req, res, next) => {
     next(error);
   }
 }
+
+exports.getAllRecipes = async (req, res, next) => {
+  try{
+    const recipes = await RecipeModel.find({})
+    return sendResponse(res, true, 200, "all-recipes", recipes);
+  }catch (error) {
+    next(error);
+  }
+}
