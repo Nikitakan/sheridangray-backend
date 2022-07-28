@@ -79,7 +79,7 @@ exports.getAllRecipes = async (req, res, next) => {
         from:CategoryModel.collection.name,
         localField:"categories",
         foreignField:"_id",
-        as:"category"
+        as:"categories"
       }},
       {$lookup:{
         from:SubCategoryModel.collection.name,
@@ -89,8 +89,7 @@ exports.getAllRecipes = async (req, res, next) => {
       }},
       {
         $project:{
-          "category.subCategories":0,
-          // "category.name":1
+          "categories.subCategories":0,
         }
       }
 
@@ -100,3 +99,4 @@ exports.getAllRecipes = async (req, res, next) => {
     next(error);
   }
 }
+
