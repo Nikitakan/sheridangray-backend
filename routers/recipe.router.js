@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const {
   addRecipeValidation,
-  isIdValidation,
   updateRecipeValidation,
 } = require("../validationSchema/recipe-schema");
+const {isIdValidation} = require("../validationSchema/isId-schema")
 const {
   addRecipe,
   getRecipe,
@@ -14,6 +14,7 @@ const {
   getSubCategoriesRecipes,
   getAllRecipes
 } = require("../controller/recipe.controller");
+
 
 router.post("/", addRecipeValidation, addRecipe);
 router.get("/:id", isIdValidation, getRecipe);

@@ -13,7 +13,7 @@ module.exports.addRecipeValidation = async (req, res, next) => {
             prepTime: Joi.number().required(),
             cookTime: Joi.number().required(),
             totalTime: Joi.number().required(),
-            categories: Joi.array().items(Joi.string().hex().length(24)),
+            categories: Joi.string().hex().length(24),
             subCategory:Joi.string().hex().length(24).required(),
             visibility:Joi.string().required()
         }) 
@@ -33,23 +33,6 @@ module.exports.addRecipeValidation = async (req, res, next) => {
 
 
 
-module.exports.isIdValidation = async (req, res, next) => {
-    try{
-        const schema = Joi.object({
-            id: Joi.string().hex().length(24),
-        })
-        let { value, error } = schema.validate(req.params);
-        if (error !== undefined) {
-            return sendResponse(res, false, 422, error.details[0].message);
-        }
-     
-        //set the variable in the request for validated data
-        req.validated = value;
-        next();
-    }catch(error){
-        next(error);
-    }
-}
 
 
 module.exports.updateRecipeValidation = async (req, res, next) => {

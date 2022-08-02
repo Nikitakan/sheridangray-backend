@@ -50,7 +50,7 @@ const recipeSchema = new mongoose.Schema({
     type: Number,
     default: null
   },
-  categories:[{ type : mongoose.Types.ObjectId, ref: 'categories' }],
+  categories:{ type : mongoose.Types.ObjectId, ref: 'categories' },
   subCategory:{
     type:mongoose.Types.ObjectId,
     ref:'subCategorie'

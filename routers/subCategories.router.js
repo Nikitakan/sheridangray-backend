@@ -4,7 +4,7 @@ const {
     addSubCategoryValidation,
     updateSubCategoryValidation
 } = require("../validationSchema/subCategories-schema");
-const { isIdValidation } = require("../validationSchema/recipe-schema");
+const { isIdValidation } = require("../validationSchema/isId-schema");
 const {
   addSubCategory,
   getSubCategory,

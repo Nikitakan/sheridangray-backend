@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   addCategoryValidation,
 } = require("../validationSchema/categories-schema");
-const { isIdValidation } = require("../validationSchema/recipe-schema");
+const { isIdValidation } = require("../validationSchema/isId-schema");
 const {
   addCategory,
   getCategory,
