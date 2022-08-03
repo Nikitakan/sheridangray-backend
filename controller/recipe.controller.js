@@ -15,7 +15,31 @@ exports.addRecipe = async (req, res, next) => {
 
 exports.getRecipe = async (req, res, next) => {
   try {
-    const recipe = await RecipeModel.findById(req.validated.id);
+    // const recipe = await RecipeModel.aggregate(req.validated.id);
+    const recipe = await RecipeModel.aggregate([
+      {$match:{
+        _id:ObjectId(req.validated.id)
+      }},
+      {$lookup:{
+        from:CategoryModel.collection.name,
+        localField:"categories",
+        foreignField:"_id",
+        as:"categories"
+      }},
+      {$lookup:{
+        from:SubCategoryModel.collection.name,
+        localField:"subCategory",
+        foreignField:"_id",
+        as:"subCategory"
+      }},
+      {
+        $project:{
+          "categories.subCategories":0,
+        }
+      }
+
+    ])
+    
     return sendResponse(res, true, 200, "recipe", recipe);
   } catch (error) {
     next(error);
