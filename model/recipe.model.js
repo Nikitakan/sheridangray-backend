@@ -2,15 +2,19 @@ const mongoose = require("mongoose");
 
 const ingredientSchema=new mongoose.Schema({
   ingredient:{
-        type:String,
-        required: true
+      type:String,
+      required: true
     },
     quantity:{
-        type:Number,
-        required:true
+      type:Number,
+      required:true
     },
     qType:{
-        type:String
+      type:String
+    },
+    checked:{
+    type: Boolean,
+    default:false
     }
 })
 
