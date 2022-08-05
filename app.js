@@ -17,6 +17,8 @@ app.use(express.static("uploads"));
 //connect the DB
 connectDB()
 
+console.log("Port=>",APP_PORT)
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDocs));
 
 require('./routers')(app)
