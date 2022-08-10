@@ -19,8 +19,8 @@ exports.addMeal = async (req, res, next) => {
 exports.getMealByDate = async (req, res, next) => {
   try {
     const dateFilter = {
-      $gte: new Date(req.body.startDate),
-      $lte: new Date(req.body.endDate),
+      $gte: new Date(req.query.startDate),
+      $lte: new Date(req.query.endDate),
     };
     // make blue print for aggregation 
     const recipeLookup = {
