@@ -59,7 +59,7 @@ exports.getMealByDate = async (req, res, next) => {
       {
         $match: {
           date: dateFilter,
-          categoryId: ObjectId("62e11ad1dd8a01a7480758e0"),
+          categoryId: ObjectId("62ed23e1bffea75a4ba6a511"),
         },
       },
       {
@@ -83,7 +83,7 @@ exports.getMealByDate = async (req, res, next) => {
         {
           $match: {
             date: dateFilter,
-            categoryId: ObjectId("62e11ad1dd8a01a7480758e0"),
+            categoryId: ObjectId("62ed23fdbffea75a4ba6a514"),
           },
         },
         {
@@ -106,7 +106,7 @@ exports.getMealByDate = async (req, res, next) => {
         {
           $match: {
             date: dateFilter,
-            categoryId: ObjectId("62e11ae8dd8a01a7480758e6"),
+            categoryId: ObjectId("62ed2410bffea75a4ba6a517"),
           },
         },
         {
