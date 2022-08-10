@@ -106,7 +106,7 @@ exports.getMealByDate = async (req, res, next) => {
         {
           $match: {
             date: dateFilter,
-            categoryId: ObjectId("62ed2410bffea75a4ba6a517"),
+            categoryId: ObjectId(""),
           },
         },
         {
